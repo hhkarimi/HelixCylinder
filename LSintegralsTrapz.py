@@ -1,28 +1,14 @@
 #!/Users/hkarimi/anaconda/lib/python3.5
 
 ##################################### LOAD MODULES #####################################
-    # for system info
-import sys
     # for performance timing
 import time # use as: tic = time.time(); elapsedTime = time.time() - tic
-    # for 'keyboard' equivalent of matlab
-import code # use with line: code.interact(local=locals()), control+d to exit
-    # for printing the current line (in conjunction with above)
-from inspect import currentframe, getframeinfo # use as:  print(getframeinfo(currentframe()).lineno), print(getframeinfo(currentframe()).filename), control+d to return
-        # keyboard equivalent: print('\n\n\nKEYBOARD at line ',getframeinfo(currentframe()).lineno,'\n\n\n'); code.interact(local=locals());
     # numerical modules
 import numpy as np
 from numpy import cos,sin,sqrt
 from scipy import integrate,special
-    # for plotting (with latex)
-#### use the following for virtual machines (AWS-EC2)
-#import matplotlib
-#matplotlib.use('Agg') # Must be before importing matplotlib.pyplot or pylab!
-#import matplotlib.pyplot as plt
 #####################################
 import matplotlib.pyplot as plt # main plotting module
-from matplotlib import cm # colormaps for 3d plots
-from mpl_toolkits.mplot3d import axes3d # for 3d axes
 plt.rc('text',usetex=True) # for latex
 plt.rc('font',family='serif') # for latex
     # for sending data to MATLAB
@@ -125,9 +111,6 @@ def psi(stokesdir,k,l):
     dIkp1_s = special.ivp(k+1,s,1)
     
     Delta = l*(s*Ik_s*( dIkm1_s*Ikp1_s+Ikm1_s*dIkp1_s) - 2*(Ik_s+s*dIk_s)*Ikm1_s*Ikp1_s )
-#    tmp = ( -s*(dIkm1_s*Ikp1_s+Ikm1_s*dIkp1_s)*L(stokesdir,k,l)
-#        - (Ik_s+s*dIk_s)*(Ikm1_s*H(stokesdir,k,l)+Ikp1_s*G(stokesdir,k,l)) ) / Delta
-#    if np.isnan(tmp): print("s,l,R0 = {:g},{:g},{:g}".format(s,l,R0))
     return ( -s*(dIkm1_s*Ikp1_s+Ikm1_s*dIkp1_s)*L(stokesdir,k,l)
         - (Ik_s+s*dIk_s)*(Ikm1_s*H(stokesdir,k,l)+Ikp1_s*G(stokesdir,k,l)) ) / Delta
 
@@ -145,9 +128,6 @@ def omega(stokesdir,k,l):
     dIkp1_s = special.ivp(k+1,s,1)
     
     Delta = l*(s*Ik_s*( dIkm1_s*Ikp1_s+Ikm1_s*dIkp1_s) - 2*(Ik_s+s*dIk_s)*Ikm1_s*Ikp1_s )
-#    tmp = s_omega*( (s*Ik_s*dIkp1_s-Ikp1_s*(Ik_s+s*dIk_s))*G(stokesdir,k,l) + ((Ik_s+s*dIk_s)*Ikm1_s-s*Ik_s*dIkm1_s)*H(stokesdir,k,l)
-#        + (Ikm1_s*dIkp1_s-dIkm1_s*dIkp1_s)*s*L(stokesdir,k,l) ) / Delta
-#    if np.isnan(tmp): print("s,l,R0 = {:g},{:g},{:g}".format(s,l,R0))
     return s_omega*( (s*Ik_s*dIkp1_s-Ikp1_s*(Ik_s+s*dIk_s))*G(stokesdir,k,l) + ((Ik_s+s*dIk_s)*Ikm1_s-s*Ik_s*dIkm1_s)*H(stokesdir,k,l) + (Ikm1_s*dIkp1_s-dIkm1_s*Ikp1_s)*s*L(stokesdir,k,l) ) / Delta
 
 def pi(stokesdir,k,l):
@@ -163,8 +143,6 @@ def pi(stokesdir,k,l):
     dIkp1_s = special.ivp(k+1,s,1)
     
     Delta = l*(s*Ik_s*( dIkm1_s*Ikp1_s+Ikm1_s*dIkp1_s) - 2*(Ik_s+s*dIk_s)*Ikm1_s*Ikp1_s )
-#    tmp = ( Ik_s*(Ikp1_s*G(stokesdir,k,l)+Ikm1_s*H(stokesdir,k,l)) + 2*L(stokesdir,k,l)*Ikm1_s*Ikp1_s ) / Delta
-#    if np.isnan(tmp): print("s,l,R0 = {:g},{:g},{:g}".format(s,l,R0))
     return ( Ik_s*(Ikp1_s*G(stokesdir,k,l)+Ikm1_s*H(stokesdir,k,l)) + 2*L(stokesdir,k,l)*Ikm1_s*Ikp1_s ) / Delta
 
 def H(stokesdir,k,l):
@@ -198,8 +176,6 @@ def gR_int(stokesdir,k,Phi,l,R):
     ddIk = special.ivp(k,l*R,2)
     if stokesdir == 1:
         tmp = cos(k*Phi)*psi(j,k,l)*l*dIk*cos(l*z) - sin(k*Phi-np.pi/2)*omega(j,k,l)*(k/R)*Ik*cos(l*z) + cos(k*Phi)*(l**2)*R*pi(j,k,l)*ddIk*cos(l*z)
-#        if np.isnan(tmp) or np.isinf(tmp):
-#            print("tmp,l,R,Ik,dIk,ddIk = {:g},{:g},{:g},{:g},{:g},{:g}".format(tmp,l,R,Ik,dIk,ddIk))
         return tmp
     elif stokesdir == 2:
         tmp = cos(k*Phi-np.pi/2)*psi(j,k,l)*l*dIk*cos(l*z) - sin(k*Phi)*omega(j,k,l)*(k/R)*Ik*cos(l*z) + cos(k*Phi-np.pi/2)*l**2*R*pi(j,k,l)*ddIk*cos(l*z)
@@ -330,7 +306,7 @@ for n in range(0,3):
     ax.locator_params(axis='x',nbins=5)
 fig2.set_tight_layout
 
-#plt.show()
+plt.show()
 
 figureName = eval("'phi' + '{:d}'.format(int(PhiDeg)) + '.pdf'")
 fig2.savefig(figureName,format='pdf')
