@@ -3,7 +3,8 @@
  *
  * \author Khalid Jawed
  * \date 09/25/2013
- *
+ * \edited Hussain Karimi - changed boundary conditions from single wall to cylinde (see function Mat3d BijCyl)
+ * \date 09/01/2016
  */
 
 #ifndef LIGHTHILLSBT_HH
