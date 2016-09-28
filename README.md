@@ -8,3 +8,6 @@ Since the computation time (~ 2 seconds) is too slow to be generated at run-time
 
 ## LighthillSBT.hh
 c++ implementation of the fluid flow-field generated in LSintegralsTrapz.py with elastic rods solver (Dynamic Elastic Rods).  This implementation is incomplete and is not intended to represent a functional program.  It is included here to demonstrate the inclusion of a complicated fluid model (LSintegralsTrapz.py) in a numerical algorithm specializing in elastic solid mechanics.
+
+## ConcatenatingFiles.py
+Once a comlete parametric generation of flow-field data in LSintegralsTrapz.py is completed, the data is structured according to the indices here.  Since the project is currently active and unpublished, the data files ConcatenatingFiles.py acts upon are excluded.
