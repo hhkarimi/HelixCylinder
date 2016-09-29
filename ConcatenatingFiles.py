@@ -36,8 +36,8 @@ for sd in ['x','y','z']:
                     
 # concatenate all sd
 uxfiles = ['uxsdx.txt','uxsdy.txt','uxsdz.txt']
-uyfiles = ['uxsdx.txt','uxsdy.txt','uxsdz.txt']
-uzfiles = ['uxsdx.txt','uxsdy.txt','uxsdz.txt']
+uyfiles = ['uysdx.txt','uysdy.txt','uysdz.txt']
+uzfiles = ['uzsdx.txt','uzsdy.txt','uzsdz.txt']
 
 for vd in ['x','y','z']:
     filenames = eval('u' + vd + 'files')
