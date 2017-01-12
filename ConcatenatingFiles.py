@@ -9,20 +9,21 @@ Concatenate files for velocity data
 
 import numpy as np
 # Generate file names to concatenate all b
-b_array = np.linspace(0,1,11)
+b_array = np.linspace(0,1,21)
+
 uxsdxfiles = []; uxsdyfiles = []; uxsdzfiles = [];
 uysdxfiles = []; uysdyfiles = []; uysdzfiles = [];
 uzsdxfiles = []; uzsdyfiles = []; uzsdzfiles = [];
 for b in b_array:
-    uxsdxfiles.append('uxb'+'{:.1f}'.format(b) + 'sdx.txt')
-    uxsdyfiles.append('uxb'+'{:.1f}'.format(b) + 'sdy.txt')
-    uxsdzfiles.append('uxb'+'{:.1f}'.format(b) + 'sdz.txt')
-    uysdxfiles.append('uyb'+'{:.1f}'.format(b) + 'sdx.txt')
-    uysdyfiles.append('uyb'+'{:.1f}'.format(b) + 'sdy.txt')
-    uysdzfiles.append('uyb'+'{:.1f}'.format(b) + 'sdz.txt')
-    uzsdxfiles.append('uzb'+'{:.1f}'.format(b) + 'sdx.txt')
-    uzsdyfiles.append('uzb'+'{:.1f}'.format(b) + 'sdy.txt')
-    uzsdzfiles.append('uzb'+'{:.1f}'.format(b) + 'sdz.txt')
+    uxsdxfiles.append('uxb'+'{:.2f}'.format(b) + 'sdx.txt')
+    uxsdyfiles.append('uxb'+'{:.2f}'.format(b) + 'sdy.txt')
+    uxsdzfiles.append('uxb'+'{:.2f}'.format(b) + 'sdz.txt')
+    uysdxfiles.append('uyb'+'{:.2f}'.format(b) + 'sdx.txt')
+    uysdyfiles.append('uyb'+'{:.2f}'.format(b) + 'sdy.txt')
+    uysdzfiles.append('uyb'+'{:.2f}'.format(b) + 'sdz.txt')
+    uzsdxfiles.append('uzb'+'{:.2f}'.format(b) + 'sdx.txt')
+    uzsdyfiles.append('uzb'+'{:.2f}'.format(b) + 'sdy.txt')
+    uzsdzfiles.append('uzb'+'{:.2f}'.format(b) + 'sdz.txt')
 
 # concatenate all b
 for sd in ['x','y','z']:
